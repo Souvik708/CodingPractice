@@ -2,6 +2,35 @@
 
 using namespace std ;
 
+vector<int> bfs(vector<vector<int>> &adj){
+    int n = adj.size() ;
+    vector<int> visited(n,0) ;
+    queue<int> q ;
+    vector<int> ans ;
+
+    for(int i = 0 ; i < n ; i ++){
+        if(!visited[i]){
+            visited[i] = 1;
+            q.push(i) ;
+        
+            while(!q.empty()){
+                int node = q.front() ;
+                ans.push_back(node) ;
+                q.pop() ;
+
+                for(auto it : adj[node]){
+                    if(!visited[it]){
+                        visited[it] = 1 ;
+                        q.push(it) ;
+                    }
+                }
+            }
+        }
+    }
+
+    return ans ;
+}
+
 int main(){
     int n , m ;
     cin >> n >> m ;
